@@ -2,7 +2,7 @@
 
 CREATE TABLE Acteur
 (
-    id_acteur  PRIMARY KEY NOT NULL,
+    id_acteur SERIAL PRIMARY KEY NOT NULL,
     nom_acteur VARCHAR (50)NOT NULL,
     prenom_acteur VARCHAR (50)  NOT NULL,
     role_acteur VARCHAR (200) NOT NULL,
@@ -24,12 +24,12 @@ CREATE TABLE Film
 );
 
 
-CREATE TABLE Joues_dans
+
+
+    CREATE TABLE Joues_dans
 (
-    id_film INT serial  ,
-	  id_acteur INT serial ,
-    FOREIGN KEY (id_film) REFERENCES public."Film"(id_film),
-    FOREIGN KEY (id_acteur) REFERENCES public."Acteur"(id_acteur)
+	id_film INT REFERENCES film(id_film),
+	id_acteur INT REFERENCES acteur(id_acteur)
 );
 
 
@@ -63,12 +63,10 @@ CREATE TABLE Utilisateur
 CREATE TABLE Pref
 (
    
-    id_film INT,
-	id_utilisateur INT,
-	FOREIGN KEY (id_film) REFERENCES public."Film"(id_film),
-	FOREIGN KEY (id_utilisateur) REFERENCES public."Utilisateur"(id_utilisateur)
+    id_film INT REFERENCES film(id_film),
+	id_utilisateur INT REFERENCES utilisateur(id_utilisateur)
+	
 );
-
 
 
 
@@ -79,23 +77,23 @@ CREATE TABLE Pref
 
 -- Data Acteur
 
-INSERT INTO Acteur (nom_acteur, prenom_acteur, role_acteur, date_naissance_acteur, date_creation, date_modif)
+INSERT INTO Acteur (id_acteur, nom_acteur, prenom_acteur, role_acteur, date_naissance_acteur, date_creation, date_modif)
 VALUES
-  ('Smith', 'John', 'Acteur principal', '1990-05-15', '2023-01-01', '2023-01-01'),
-  ('Doe', 'Jane', 'Actrice secondaire', '1985-11-20', '2023-01-02', '2023-01-02'),
-  ('Johnson', 'Michael', 'Second rôle', '1978-09-10', '2023-01-03', '2023-01-03'),
-  ('Williams', 'Emily', 'Figurant', '1995-03-25', '2023-01-04', '2023-01-04'),
-  ('James', 'Jones', 'Lead Actress', '1990-09-03', '2022-01-01', '2022-01-01'),
-  ('Emma', 'Johnson', 'Supporting Actress', '1988-04-22', '2022-01-01', '2022-01-01'),
-  ('William', 'White', 'Lead Actor', '1993-12-07', '2022-01-01', '2022-01-01'),
-  ('Mia', 'Davis', 'Supporting Actor', '1981-11-14', '2022-01-01', '2022-01-01'),
-  ('Ethan', 'Miller', 'Character Actor', '1970-06-29', '2022-01-01', '2022-01-01'),
-  ('Ava', 'Anderson', 'Lead Actress', '1995-03-26', '2022-01-01', '2022-01-01'),
-  ('Noah', 'Brown', 'Supporting Actress', '1987-10-11', '2022-01-01', '2022-01-01');
+  ('1','Smith', 'John', 'Acteur principal', '1990-05-15', '2023-01-01', '2023-01-01'),
+  ('2','Doe', 'Jane', 'Actrice secondaire', '1985-11-20', '2023-01-02', '2023-01-02'),
+  ('3','Johnson', 'Michael', 'Second rôle', '1978-09-10', '2023-01-03', '2023-01-03'),
+  ('4','Williams', 'Emily', 'Figurant', '1995-03-25', '2023-01-04', '2023-01-04'),
+  ('5','James', 'Jones', 'Lead Actress', '1990-09-03', '2022-01-01', '2022-01-01'),
+  ('6','Emma', 'Johnson', 'Supporting Actress', '1988-04-22', '2022-01-01', '2022-01-01'),
+  ('7','William', 'White', 'Lead Actor', '1993-12-07', '2022-01-01', '2022-01-01'),
+  ('8','Mia', 'Davis', 'Supporting Actor', '1981-11-14', '2022-01-01', '2022-01-01'),
+  ('9','Ethan', 'Miller', 'Character Actor', '1970-06-29', '2022-01-01', '2022-01-01'),
+  ('10','Ava', 'Anderson', 'Lead Actress', '1995-03-26', '2022-01-01', '2022-01-01'),
+  ('11','Noah', 'Brown', 'Supporting Actress', '1987-10-11', '2022-01-01', '2022-01-01');
 
 
 -- -- Data Film  : 
-INSERT INTO directors (first_name,last_name,creation_dt,modification_dt) VALUES
+INSERT INTO film (titre_film,année_film,dureé_film,date_creation,date_modif) VALUES
  ('Inception', '2010-07-16', '2h28m', '2023-01-01', '2023-01-01'),
   ('The Shawshank Redemption', '1994-09-23', '2h22m', '2023-01-02', '2023-01-02'),
   ('The Godfather', '1972-03-24', '2h58m', '2023-01-03', '2023-01-03'),
@@ -130,7 +128,6 @@ VALUES
   ('Doe', 'John', 'johndoe@example.com', 'motdepasse123', 'Utilisateur standard', 'Liste 1', '2023-01-01', '2023-01-01'),
   ('Smith', 'Jane', 'janesmith@example.com', 'mdpsecret456', 'Administrateur', 'Liste 2', '2023-01-02', '2023-01-02'),
   ('Johnson', 'Michael', 'michaeljohnson@example.com', 'secretpassword789', 'Utilisateur standard', 'Liste 3', '2023-01-03', '2023-01-03'),
-  ('Williams', 'Emily', 'emilywilliams@example.com', 'mdpfort456', 'Modérateur', 'Liste 4', '2023-01-04', '2023-01-04'),
   ('Brown', 'David', 'davidbrown@example.com', 'password123', 'Utilisateur standard', 'Liste 5', '2023-01-05', '2023-01-05'),
   ('Garcia', 'Maria', 'mariagarcia@example.com', 'securepass789', 'Administrateur', 'Liste 6', '2023-01-06', '2023-01-06'),
   ('Chen', 'Wei', 'weichen@example.com', 'motdepasse456', 'Utilisateur standard', 'Liste 7', '2023-01-07', '2023-01-07'),
